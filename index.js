@@ -36,6 +36,7 @@ async function main() {
 					.replace(' ', '')
 					.replace('ED  ', `fid,${i},`)
 					.replace('ED   ', `fid,${i},`)
+					.replace('ED 1', `fid,${i},1`)
 					// .replace('ED 1', `AD${i}-ED1`)
 					// .replace('ED1,', 'ED 1,')
 					// .replace('Total', `AD${i}-Total`)

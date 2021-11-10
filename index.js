@@ -13,22 +13,7 @@ const rl = readline.createInterface({
 
 let _date = new Date();
 
-let race_base = {
-	mayor:'CD23376AD',
-	public_advocate:'CD23370AD',
-	city_comptroller:'CD23385AD',
-	borough_president_ny:'CD23365AD',
-	borough_president_bronx:'CD23366AD',
-	borough_president_kings:'CD23367AD',
-	borough_president_queens:'CD23368AD',
-	borough_president_richmond:'CD23369AD',
-	prop_1:'CD24566AD',
-	prop_2:'CD24567AD',
-	prop_3:'CD24568AD',
-	prop_4:'CD24569AD',
-	prop_5:'CD24570AD',
-	"cd_[1-51]":''
-}
+let race_base = require('./config.json');
 
 function main(){
 rl.question("Enter race (or type l to list all options):", function(cdNum) {
@@ -50,7 +35,13 @@ rl.question("Enter race (or type l to list all options):", function(cdNum) {
 		process.exit(0);
 	}
 	
-	const raceBase = cdNum.includes('cd_') ? `CD23${390+parseInt(cdNum.replace('cd_',''))}AD` : race_base[cdNum];
+	let raceBase = race_base[cdNum];
+	if(cdNum.substring(0,3)==='cd_'){
+		const num = cdNum.replace('cd_','');
+		raceBase = race_base["cd_[1-51]"].replace('%NUM%',390+parseInt(num));
+		
+	}
+	
 	const baseurl = `https://web.enrboenyc.us/${raceBase}`
 
 	scrape(baseurl);

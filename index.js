@@ -30,7 +30,8 @@ let race_base = {
 	"cd_[1-51]":''
 }
 
-rl.question("Enter race or type l to list all options:", function(cdNum) {
+function main(){
+rl.question("Enter race (or type l to list all options):", function(cdNum) {
 	if(cdNum === 'l'){
 		console.log('#########################')
 		console.log()
@@ -40,24 +41,28 @@ rl.question("Enter race or type l to list all options:", function(cdNum) {
 		});
 		console.log()
 		console.log('#########################')
-		process.exit(0);
+		main();
+		return;
 	}
-	if((!race_base[cdNum] || typeof race_base[cdNum] === 'undefined') && !cdNum.includes('cd_')){
+
+	if((!race_base[cdNum] || typeof race_base[cdNum] === 'undefined') && cdNum.substring(0,3)!=='cd_'){
 		console.error('ERROR: You did not enter a valid race. Try again or type l to list all options.');
 		process.exit(0);
 	}
-	//
-	const raceBase = cdNum.includes('cd_')? `CD23${390+cdNum}AD` : race_base[cdNum];
+	
+	const raceBase = cdNum.includes('cd_') ? `CD23${390+parseInt(cdNum.replace('cd_',''))}AD` : race_base[cdNum];
 	const baseurl = `https://web.enrboenyc.us/${raceBase}`
-	main(baseurl);
+
+	scrape(baseurl);
 });
+}
+
+
+main();
 
 
 
-
-
-
-async function main(baseurl) {
+async function scrape(baseurl) {
 	const startAD = 23;
 	const endAD = 87;
 

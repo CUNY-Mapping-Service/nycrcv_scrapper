@@ -45,7 +45,7 @@ rl.question("Enter race (or type l to list all options):", function(cdNum) {
 	const baseurl = `https://web.enrboenyc.us/${raceBase}`
 	// https://web.archive.org/web/20250625031114/https://web.enrboenyc.us/
 
-	scrape(baseurl, race_base[cdNum]);
+	scrape(baseurl, cdNum);
 });
 }
 

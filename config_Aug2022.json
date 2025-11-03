@@ -1,0 +1,26 @@
+{
+	"congress3":"CD25659AD",
+	"congress7":"CD25640AD",
+	"congress8":"CD25633AD",
+	"congress10":"CD25622AD",
+	"congress11":"CD25632AD",
+	"congress12":"CD25624AD",
+	"congress13":"CD25641AD",
+	"congress16":"CD25660AD",
+	"congress11gop":"CD25631AD",
+
+	"senate15":"CD25637AD",
+"senate21":"CD25620AD",
+"senate23":"CD25625AD",
+"senate25":"CD25642AD",
+"senate26":"CD25639AD",
+"senate27":"CD25621AD",
+"senate30":"CD25623AD",
+"senate31":"CD25630AD",
+"senate33":"CD25636AD",
+"senate34":"CD25661AD",
+"senate47":"CD25634AD",
+"senate59":"CD25638AD",
+
+	"senate[23-87]":"CD23%NUM%AD"
+}

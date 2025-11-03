@@ -43,8 +43,9 @@ rl.question("Enter race (or type l to list all options):", function(cdNum) {
 	}
 	
 	const baseurl = `https://web.enrboenyc.us/${raceBase}`
+	// https://web.archive.org/web/20250625031114/https://web.enrboenyc.us/
 
-	scrape(baseurl);
+	scrape(baseurl, race_base[cdNum]);
 });
 }
 
@@ -53,7 +54,7 @@ main();
 
 
 
-async function scrape(baseurl) {
+async function scrape(baseurl, raceTypeName) {
 	const startAD = 23;
 	const endAD = 87;
 
@@ -111,11 +112,11 @@ async function scrape(baseurl) {
 		let joinArray = splitArray.join(',');
 		return joinArray
 	});
-	writeToCSVFile(mappedArr.join('\n'))
+	writeToCSVFile(mappedArr.join('\n'), raceTypeName)
 }
 
-function writeToCSVFile(data) {
-	const filename = `${_date.getFullYear()}${_date.getMonth()+1}${_date.getDate()}${_date.getHours()}${_date.getMinutes()}-output.csv`;
+function writeToCSVFile(data, raceTypeName) {
+	const filename = `${raceTypeName}_${_date.getFullYear()}${_date.getMonth()+1}${_date.getDate()}${_date.getHours()}${_date.getMinutes()}-output.csv`;
 	fs.writeFile(filename, data, err => {
 		if (err) {
 			console.log('Error writing to csv file', err);

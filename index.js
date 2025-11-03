@@ -1,4 +1,3 @@
-const rp = require('request-promise');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const {
@@ -67,7 +66,11 @@ async function scrape(baseurl, raceTypeName) {
 		console.log(`Loading Assembly District ${i}: ${((i-startAD)/numDistricts)*100}% complete`);
 		const url = `${baseurl}${i}${urlSuffix}`;
 		try {
-			const html = await rp(url);
+			const response = await fetch(url);
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			const html = await response.text();
 			const $ = cheerio.load(html);
 			const eds = $('table.underline td');
 			for (let ed = 0; ed < eds.length; ed++) {
@@ -98,7 +101,7 @@ async function scrape(baseurl, raceTypeName) {
 				}
 			}
 		}catch(e){
-			console.log("ERROR: "+e.statusCode)
+			console.log("ERROR: "+e.message)
 		}
 
 	}
